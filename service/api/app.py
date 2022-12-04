@@ -2,7 +2,7 @@ import asyncio
 from concurrent.futures.thread import ThreadPoolExecutor
 from typing import Any, Dict
 
-#import uvloop
+# import uvloop
 from fastapi import FastAPI
 
 from ..log import app_logger, setup_logging
@@ -31,7 +31,7 @@ __all__ = ("create_app",)
 
 def create_app(config: ServiceConfig) -> FastAPI:
     setup_logging(config)
-    #setup_asyncio(thread_name_prefix=config.service_name)
+    # setup_asyncio(thread_name_prefix=config.service_name)
 
     app = FastAPI(debug=False)
     app.state.k_recs = config.k_recs

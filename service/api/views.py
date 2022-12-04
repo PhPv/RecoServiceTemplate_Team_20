@@ -9,6 +9,7 @@ from service.models import Error
 
 model_name_list = ["model_1"]
 
+
 class RecoResponse(BaseModel):
     user_id: int
     items: List[int]
@@ -48,8 +49,8 @@ not_found_examples = {
 }
 
 recommendations_example = {
-  "user_id": 0,
-  "items": list(range(10)),
+    "user_id": 0,
+    "items": list(range(10)),
 }
 
 
@@ -84,7 +85,6 @@ async def health() -> str:
         },
     },
 )
-
 async def get_reco(
     request: Request,
     model_name: str,
@@ -94,12 +94,11 @@ async def get_reco(
 
     if model_name not in model_name_list:
         raise ModelNotFoundError(error_message=f"{model_name} not found")
-    
+
     if user_id > 10**9:
         raise UserNotFoundError(error_message=f"User {user_id} not found")
 
     # добавить проверку аутентификации (после написание самой аутентификации)
-
 
     k_recs = request.app.state.k_recs
     reco = list(range(k_recs))
