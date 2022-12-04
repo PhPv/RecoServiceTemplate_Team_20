@@ -36,6 +36,15 @@ not_found_examples = {
             },
         ],
     },
+    "user not authorized": {
+        "value": [
+            {
+                "error_key": "user_not_authorized",
+                "error_message": "user not authorized",
+                "error_loc": None,
+            },
+        ],
+    },
 }
 
 recommendations_example = {
@@ -65,6 +74,14 @@ async def health() -> str:
                 },
             },
         },
+        401: {
+            "model": List[Error],
+            "content": {
+                "application/json": {
+                    "examples": not_found_examples,
+                },
+            },
+        },
     },
 )
 
@@ -81,6 +98,7 @@ async def get_reco(
     if user_id > 10**9:
         raise UserNotFoundError(error_message=f"User {user_id} not found")
 
+    # добавить проверку аутентификации (после написание самой аутентификации)
 
 
     k_recs = request.app.state.k_recs
